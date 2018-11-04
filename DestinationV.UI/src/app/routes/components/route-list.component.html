@@ -1,0 +1,17 @@
+<h2>Routes</h2>
+
+
+<div class="row" *ngFor="let route of routeList$ | async">
+  <div class="col-md-12">
+    <div class="col-md-4">
+      From: <strong>{{route.origin.name}}</strong>
+    </div>
+    <div class="col-md-4">
+      To: <strong>{{route.destination.name}}</strong>
+    </div>
+    <div class="col-md-4">
+      Departing time: {{route.departUtc | uDate: "dd/MM/yyyy HH:mm"}}
+    </div>
+  </div>
+
+</div>
