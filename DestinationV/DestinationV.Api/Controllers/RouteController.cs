@@ -48,7 +48,7 @@ namespace DestinationV.Api.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(string id)
         {
-            await _mediator.Send(new RouteCommand(id));
+           await _mediator.Send(new RouteCommand(id));
         }
     }
 }

@@ -1,0 +1,21 @@
+<div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">From</div>
+      <div class="col-md-8"><strong>{{dto.origin.name}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">To</div>
+      <div class="col-md-8"><strong>{{dto.destination.name}}</strong></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">Departure</div>
+      <div class="col-md-8"><strong>{{dto.departUtc | uDate: "dd/MM/yyyy HH:mm"}}</strong></div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger btn-sm" (click)="deleteClick()">Delete</button>
+  <button type="button" class="btn btn-primary btn-sm" (click)="okClick()">OK</button>
+  <button type="button" class="btn btn-success btn-sm" (click)="edittedClick()">Edit</button>
+</div>

@@ -5,7 +5,12 @@ import { RouteListComponent } from './routes/components/route-list.component';
 const routes: Routes = [
   {
     path: 'routes',
-    component: RouteListComponent
+    children: [
+      {
+        path: '',
+        component: RouteListComponent
+      }
+    ]
   }
 ];
 

@@ -1,12 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CollapseModule } from 'ngx-bootstrap';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        CollapseModule
       ],
       declarations: [
         AppComponent
@@ -20,16 +22,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'DestinationV-UI'`, () => {
+  it(`should have no title in on load`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('DestinationV-UI');
+    expect(app.currentRoute).toEqual(null);
   });
 
-  it('should render title in a h1 tag', () => {
+  it('should render navigation bar', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to DestinationV-UI!');
+    expect(compiled.querySelector('a.navbar-brand').textContent).toContain('DestinationV');
   });
 });

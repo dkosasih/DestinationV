@@ -1,16 +1,17 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Inject, Optional } from '@angular/core';
+import { Injector } from '@angular/core';
 import { API_HOST } from 'src/app/configs/api-host.config';
 
-export abstract class BaseDataService {
+export class BaseDataService {
   private readonly headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private host: string;
 
   constructor(private baseHttp: HttpClient,
-    apiHost: string
+    injector: Injector
   ) {
+    const apiHost = injector.get(API_HOST);
     this.host = apiHost;
   }
 
@@ -26,7 +27,7 @@ export abstract class BaseDataService {
       } else {
         errMsg = error.message ? error.message : error.toString();
       }
-      return Observable.throw({ message: errMsg });
+      return throwError({ message: errMsg });
     };
   }
 
@@ -42,6 +43,22 @@ export abstract class BaseDataService {
 
   protected baseHttpPost<T, U>(url: string, data: T): Observable<U> {
     return this.baseHttp.post<U>(
+      `${this.host}${url}`, data, { headers: this.headers }
+    ).pipe(
+      catchError(this.handleError<U>())
+    );
+  }
+
+  protected baseHttpDelete<T>(url: string) {
+    return this.baseHttp.delete(
+      `${this.host}${url}`, { headers: this.headers }
+    ).pipe(
+      catchError(this.handleError())
+    );
+  }
+
+  protected baseHttpPut<T, U>(url: string, data: T): Observable<U> {
+    return this.baseHttp.put<U>(
       `${this.host}${url}`, data, { headers: this.headers }
     ).pipe(
       catchError(this.handleError<U>())
