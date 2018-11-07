@@ -7,7 +7,7 @@ using DestinationV.Domain.Entity.RouteEntity;
 
 namespace DestinationV.Application.Queries
 {
-    public class RouteQueryHandler: IQueryHandler<RoutesQuery, IList<Route>>
+    public class RouteQueryHandler: IQueryHandler<RouteQuery, Route>, IQueryHandler<RoutesQuery, IList<Route>>
     {
         private readonly IRouteRepository _routeRepository;
 
