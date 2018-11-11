@@ -1,14 +1,9 @@
 import { RouteDto } from '../../dtos/route.dto';
-import * as fromRoot from '../../../store/reducers';
 import { createFeatureSelector, createSelector, ActionReducerMap } from '@ngrx/store';
 import { routesReducerFn } from './routes.reducer';
 
 export interface RouteState {
   routes: RouteDto[];
-}
-
-export interface State extends fromRoot.State {
-  routeState: RouteState;
 }
 
 export const routesReducer: ActionReducerMap<RouteState> = {

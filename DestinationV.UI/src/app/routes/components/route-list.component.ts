@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State, getRoutes } from '../store/reducers';
+import { getRoutes, RouteState } from '../store/reducers';
 import { RouteDto } from '../dtos/route.dto';
 import { Observable } from 'rxjs';
 import { LoadRoutes, DeleteRoute } from '../store/actions/routes.action';
@@ -21,7 +21,7 @@ export class RouteListComponent implements OnInit {
 
   routeList$: Observable<RouteDto[]>;
 
-  constructor(private store: Store<State>, private modalService: BsModalService) {
+  constructor(private store: Store<RouteState>, private modalService: BsModalService) {
     store.dispatch(new LoadRoutes());
 
     this.routeList$ = store.select(getRoutes);
