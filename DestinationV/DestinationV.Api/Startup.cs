@@ -1,9 +1,8 @@
 ﻿using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using DestinationV.Application.Modules;
+using DestinationV.Api.Modules;
 using DestinationV.Persistence;
-using DestinationV.Persistence.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

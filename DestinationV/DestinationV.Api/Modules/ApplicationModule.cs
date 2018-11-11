@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Reflection;
 using Autofac;
 using Autofac.Features.Variance;
-using DestinationV.Domain.Entity.PlaceEntity;
-using DestinationV.Domain.Entity.RouteEntity;
+using DestinationV.Application.Commands;
 using MediatR;
 
-namespace DestinationV.Application.Modules
+namespace DestinationV.Api.Modules
 {
     public class ApplicationModule : Autofac.Module
     {
@@ -26,6 +23,12 @@ namespace DestinationV.Application.Modules
                 .RegisterType<Mediator>()
                 .As<IMediator>()
                 .InstancePerLifetimeScope();
+
+            // Register all the Command classes (they implement IRequestHandler) in assembly holding the Commands
+            builder.RegisterAssemblyTypes(typeof(RouteCommand).GetTypeInfo().Assembly)
+                .AsClosedTypesOf(typeof(IRequestHandler<,>));
+
+            // Implement INotifierHandler and IValidator when first Notifier or Validator is being implemented
 
             // request handlers
             builder.Register<ServiceFactory>(context =>

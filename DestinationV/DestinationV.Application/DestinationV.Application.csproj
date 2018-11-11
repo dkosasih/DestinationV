@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="MediatR" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DestinationV.Domain\DestinationV.Domain.csproj" />
+    <ProjectReference Include="..\DestinationV.Persistance\DestinationV.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
