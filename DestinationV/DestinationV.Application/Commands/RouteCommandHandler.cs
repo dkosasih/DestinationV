@@ -22,7 +22,7 @@ namespace DestinationV.Application.Commands
             var routeEntity = new Route();
             if (command.Route != null)
             {
-                routeEntity = mapRouteViewModelToRouteEntity(command.Route);
+                routeEntity = MapRouteViewModelToRouteEntity(command.Route);
             }
 
             switch (command.OperationType)
@@ -43,7 +43,7 @@ namespace DestinationV.Application.Commands
             return Unit.Value;
         }
 
-        private Route mapRouteViewModelToRouteEntity(Queries.Route routeVm)
+        private Route MapRouteViewModelToRouteEntity(Queries.Route routeVm)
         {
             return new Route
             {
