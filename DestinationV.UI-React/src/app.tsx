@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router as Router, Route } from 'react-router-dom';
 import TitleBar from './title-bar';
+import RouteList from './routes-module/components/route-list.component';
 import logo from './logo.svg';
 
 import { History } from 'history';
@@ -19,11 +20,12 @@ export const doRoutes = () => {
                     <Route path="/" render={props => <TitleBar {...props} />} />
                 </div>
                 <div className="container">
+                    <Route path='/routes' render={(props) => <RouteList {...props} />} />
                     <div className="App">
                         <header className="App-header">
                             <img src={logo} className="App-logo" alt="logo" />
                             <p>
-                                Edit <code>src/App.tsx</code> and save to reload.
+                                Edit <code>src/app.tsx</code> and save to reload.
                             </p>
                             <a
                                 className="App-link"
