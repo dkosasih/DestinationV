@@ -1,9 +1,9 @@
 import { RouteDto } from "../../dto/route.dto";
-import { RouteTypes } from "../action/route.action";
+import { RouteTypes, RouteActions } from "../action/route.action";
 
 const initialState: RouteDto[] = [];
 
-export function routesReducerFn(state = initialState, action: any): RouteDto[] {
+export function routesReducerFn(state = initialState, action: RouteActions): RouteDto[] {
   switch (action.type) {
     case RouteTypes.LoadRoutesComplete:
       return [...action.payload];

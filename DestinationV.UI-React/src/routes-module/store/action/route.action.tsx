@@ -16,14 +16,15 @@ interface ActionPayload<T> {
     payload: T;
 }
 
-export const loadRoutes: ActionCreator<ActionTypes> = () => ({
-    type: RouteTypes.LoadRoutes
-});
+// TODO: Remove this once class approache below is stabilized
+// export const loadRoutes: ActionCreator<ActionTypes> = () => ({
+//     type: RouteTypes.LoadRoutes
+// });
 
-export const loadRoutesComplete: ActionCreator<ActionTypes & ActionPayload<RouteDto[]>> = routesDto => ({
-    type: RouteTypes.LoadRoutesComplete,
-    payload: routesDto
-});
+// export const loadRoutesComplete: ActionCreator<ActionTypes & ActionPayload<RouteDto[]>> = routesDto => ({
+//     type: RouteTypes.LoadRoutesComplete,
+//     payload: routesDto
+// });
 
 export class LoadRoutes {
     readonly type = RouteTypes.LoadRoutes
