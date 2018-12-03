@@ -2,7 +2,7 @@ import './route-list.component.scss';
 import { RouteDto } from '../dto/route.dto';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { loadRoutes, LoadRoutes } from '../store/action/route.action';
+import { LoadRoutes } from '../store/action/route.action';
 
 export interface  ComponentProps extends StateProps, DispatchProps {
     // products: RouteDto[];
@@ -80,14 +80,8 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: Function, props: OwnProps) => ({
-    loadRoutes: () => {
-        const lrs = new LoadRoutes();
-        const action = lrs.action();
-        console.log(action);
-        const rt = loadRoutes();
-        console.log(rt);
-        dispatch(action);
-    },
+    loadRoutes: () => dispatch((new LoadRoutes()).action())
+    ,
     // deleteProduct: (id: string, authToken: string) => dispatch(productActions.deleteProductAction(id, authToken))
 });
 
