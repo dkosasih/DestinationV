@@ -22,7 +22,7 @@ class TitleBar extends PureComponent<any> {
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>
-                    <NavItem eventKey={1}>All Schedule</NavItem>
+                    <NavItem eventKey={1} onClick={() => this.goTo('routes')}>All Schedule</NavItem>
                 </Nav>
                 <Nav className="pull-right right-menu">
                     <NavItem eventKey={2.1} onClick={() => null}>
