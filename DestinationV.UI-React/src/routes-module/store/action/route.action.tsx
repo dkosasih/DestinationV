@@ -1,45 +1,52 @@
 import { RouteDto } from "../../dto/route.dto";
 import { ActionCreator } from "redux";
 
-export enum RouteTypes {
-    LoadRoutes = '[Routes] Load',
-    LoadRoutesComplete = '[Routes] Load Complete',
-    DeleteRoute = '[Route] Delete',
-    DeleteRouteComplete = '[Route] Delete Complete'
-}
-
-interface ActionTypes {
+interface ActionTypes<T> {
     type: RouteTypes;
+    payload?: T;
 }
 
-interface ActionPayload<T> {
-    payload: T;
+export enum RouteTypes {
+    LoadRoutes = '[Routes] Load routes',
+    LoadRoutesCompleted = '[Routes] Load routes completed',
+    LoadRoutesFailed = '[Routes] Load routes failed',
+    DeleteRoute = '[Route] Delete route',
+    DeleteRouteCompleted = '[Route] Delete route completed',
+    DeleteRouteFailed = '[Route] Delete route failed',
 }
 
-// TODO: Remove this once class approache below is stabilized
-// export const loadRoutes: ActionCreator<ActionTypes> = () => ({
-//     type: RouteTypes.LoadRoutes
-// });
+interface LoadRoutes extends ActionTypes<null> { }
+interface LoadRoutesCompleted extends ActionTypes<RouteDto[]> { }
+interface LoadRoutesFailed extends ActionTypes<null> { }
+interface DeleteRoute extends ActionTypes<string> { }
+interface DeleteRouteCompleted extends ActionTypes<string> { }
+interface DeleteRouteFailed extends ActionTypes<null> { }
 
-// export const loadRoutesComplete: ActionCreator<ActionTypes & ActionPayload<RouteDto[]>> = routesDto => ({
-//     type: RouteTypes.LoadRoutesComplete,
-//     payload: routesDto
-// });
+export const loadRoutes: ActionCreator<LoadRoutes> = () => ({
+    type: RouteTypes.LoadRoutes
+});
 
-export class LoadRoutes {
-    readonly type = RouteTypes.LoadRoutes
-    action: ActionCreator<ActionTypes> = () => ({
-        type: RouteTypes.LoadRoutes
-    });
-}
+export const loadRoutesComplete: ActionCreator<LoadRoutesCompleted> = routesDto => ({
+    type: RouteTypes.LoadRoutesCompleted,
+    payload: routesDto
+});
 
-export class LoadRoutesComplete {
-    readonly type = RouteTypes.LoadRoutesComplete;
-    constructor(public payload: RouteDto[]) {}
-    action: ActionCreator<ActionTypes & ActionPayload<RouteDto[]>> = () => ({
-        type: RouteTypes.LoadRoutesComplete,
-        payload: this.payload
-    });
-}
+export const loadRoutesFailed: ActionCreator<LoadRoutesFailed> = () => ({
+    type: RouteTypes.LoadRoutesCompleted
+});
 
-export type RouteActions = LoadRoutes | LoadRoutesComplete;
+export const deleteRoute: ActionCreator<DeleteRoute> = (routeId: string) => ({
+    type: RouteTypes.DeleteRoute,
+    payload: routeId
+});
+
+export const deleteRouteCompleted: ActionCreator<DeleteRouteCompleted> = (routeId: string) => ({
+    type: RouteTypes.DeleteRouteCompleted,
+    payload: routeId
+});
+
+export const deleteRouteFailed: ActionCreator<DeleteRouteFailed> = () => ({
+    type: RouteTypes.DeleteRouteFailed
+});
+
+export type RouteActions = LoadRoutes | LoadRoutesCompleted | LoadRoutesFailed | DeleteRoute | DeleteRouteCompleted | DeleteRouteFailed;

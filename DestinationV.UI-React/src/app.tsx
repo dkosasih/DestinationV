@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router as Router, Route } from 'react-router-dom';
-import TitleBar from './title-bar';
-import RouteList from './routes-module/components/route-list.component';
+import TitleBar from './TitleBar';
+import RouteList from './routes-module/components/route-list/RouteList';
 import logo from './logo.svg';
 
 import { History } from 'history';
@@ -21,22 +21,23 @@ export const doRoutes = () => {
                 </div>
                 <div className="container">
                     <Route path='/routes' render={(props) => <RouteList {...props} />} />
-                    <div className="App">
-                        <header className="App-header">
-                            <img src={logo} className="App-logo" alt="logo" />
-                            <p>
-                                Edit <code>src/app.tsx</code> and save to reload.
-                            </p>
-                            <a
-                                className="App-link"
-                                href="https://reactjs.org"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Learn React
-                            </a>
-                        </header>
-                    </div>
+                    <Route exact path="/" render={() =>
+                        <div className="App">
+                            <header className="App-header">
+                                <img src={logo} className="App-logo" alt="logo" />
+                                <p>
+                                    Edit <code>src/app.tsx</code> and save to reload.
+                                </p>
+                                <a
+                                    className="App-link"
+                                    href="https://reactjs.org"
+                                    target="_blank"
+                                    rel="noopener noreferrer">
+                                    Learn React
+                                </a>
+                            </header>
+                        </div>}
+                    />
                 </div>
             </div>
         </Router>

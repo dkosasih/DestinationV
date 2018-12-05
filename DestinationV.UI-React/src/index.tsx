@@ -7,8 +7,8 @@ import { doRoutes } from './app';
 import * as serviceWorker from './serviceWorker';
 import { compose, applyMiddleware, createStore } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
-import reducers, { RootState } from './reducers';
-import epics from './epics';
+import reducers, { RootState } from './store/reducers';
+import epics from './store/epics';
 import { Provider } from 'react-redux';
 
 declare global {

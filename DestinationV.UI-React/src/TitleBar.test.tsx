@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TitleBar from './title-bar';
+import TitleBar from './TitleBar';
 
 test('renders without crashing', () => {
   const div = document.createElement('div');
