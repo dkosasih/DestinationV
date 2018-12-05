@@ -1,9 +1,9 @@
-import './route-list.component.scss';
+import './RouteList.scss';
 import { RouteDto } from '../../dto/route.dto';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { loadRoutes, deleteRoute } from '../../store/action/route.action';
-import { RouteItem } from './route-item.component';
+import { RouteItem } from './RouteItem';
 
 export interface  ComponentProps {
     routes: RouteDto[];

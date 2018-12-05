@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router as Router, Route } from 'react-router-dom';
-import TitleBar from './title-bar';
-import RouteList from './routes-module/components/route-list/route-list.component';
+import TitleBar from './TitleBar';
+import RouteList from './routes-module/components/route-list/RouteList';
 import logo from './logo.svg';
 
 import { History } from 'history';

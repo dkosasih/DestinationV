@@ -4,7 +4,7 @@ import { PureComponent } from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import './title-bar.scss';
+import './TitleBar.scss';
 
 class TitleBar extends PureComponent<any> {
     goTo(route: string) {
