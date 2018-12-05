@@ -8,7 +8,7 @@ import './title-bar.scss';
 
 class TitleBar extends PureComponent<any> {
     goTo(route: string) {
-        this.props.history.replace(`/${route}`);
+        this.props.history.push(`/${route}`);
     }
 
     render() {
@@ -23,11 +23,6 @@ class TitleBar extends PureComponent<any> {
                 </Navbar.Header>
                 <Nav>
                     <NavItem eventKey={1} onClick={() => this.goTo('routes')}>All Schedule</NavItem>
-                </Nav>
-                <Nav className="pull-right right-menu">
-                    <NavItem eventKey={2.1} onClick={() => null}>
-                        Logout
-                    </NavItem>
                 </Nav>
             </Navbar>
         );
