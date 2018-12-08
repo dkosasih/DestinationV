@@ -22,7 +22,7 @@ namespace DestinationV.Application.Tests.Queries
         public void Init()
         {
             _routeRepository = Substitute.For<IRouteRepository>();
-            _routeRepository.GetAll().Returns(RouteHelper.CreateMockRoutes());
+            _routeRepository.GetAll().Returns(RoutePlaceMockHelper.CreateMockRoutes());
             _routeRepository.GetById(Arg.Any<string>())
                 .Returns(new Route()
                 {
