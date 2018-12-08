@@ -16,6 +16,11 @@ namespace DestinationV.Persistence.Repositories
             _schedulingDbContext = schedulingDbContext;
         }
 
+        public async Task<IList<Place>> GetAll()
+        {
+            return await _schedulingDbContext.Places.ToListAsync();
+        }
+
         public async Task<Place> GetById(string id)
         {
             return await _schedulingDbContext.Places.SingleOrDefaultAsync(r => r.Id == id);
