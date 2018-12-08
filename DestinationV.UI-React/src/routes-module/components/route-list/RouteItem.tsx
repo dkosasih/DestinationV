@@ -17,15 +17,26 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
         }
     }
 
-    setModalState(value: boolean) {
+    showModal() {
         this.setState({
-            modalShow: value
+            modalShow: true
         });
     }
 
-    handleDelete(routeId: string) {
+    hideModal() {
+        this.setState({
+            modalShow: false
+        });
+    }
+    // setModalState(value: boolean) {
+    //     this.setState({
+    //         modalShow: value
+    //     });
+    // }
+
+    handleDelete() {
         if (this.props.onDelete) {
-            this.props.onDelete(routeId);
+            this.props.onDelete(this.props.route.id);
         }
     }
 
@@ -50,11 +61,11 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
                     </div>
                     <div className="col-md-4">Departing time: {this.route.departUtc}</div>
                     <div className="col-md-2">
-                        <a href="#" onClick={() => this.setModalState(true)}>
+                        <a href="#" onClick={this.showModal}>
                             edit
                     </a>
                     </div>
-                    <Modal show={this.state.modalShow } onHide={() => this.setModalState(false)} backdrop={'static'}>
+                    <Modal show={this.state.modalShow } onHide={this.hideModal} backdrop={'static'}>
                         <Modal.Body>
                         <form>
                             <div className="container-fluid">
@@ -82,9 +93,9 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
                         </form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <button className="btn btn-danger btn-sm" onClick={() => this.handleDelete(this.route.id)}>Delete</button>
-                            <button className="btn btn-primary btn-sm" onClick={() => this.setModalState(false)}>Cancel</button>
-                            <button className="btn btn-success btn-sm" onClick={() => this.setModalState(false)}>Save</button>
+                            <button className="btn btn-danger btn-sm" onClick={this.handleDelete}>Delete</button>
+                            <button className="btn btn-primary btn-sm" onClick={this.hideModal}>Cancel</button>
+                            <button className="btn btn-success btn-sm" onClick={this.hideModal}>Save</button>
                         </Modal.Footer>
                     </Modal>
                 </div>

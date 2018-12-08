@@ -30,10 +30,6 @@ export class RouteList extends React.Component<ComponentProps, {}> {
         this.props.deleteProduct(id);
     }
 
-    renderChildren = () => this.props.routes.map((x, i) => {
-        return i % 2 === 0 ? this.props.routes!.slice(i, i + 2) : null;
-    }).filter(x => x != null);
-
     render() {
         if (this.props.routes) {
             return (
