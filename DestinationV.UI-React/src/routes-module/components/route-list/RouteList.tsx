@@ -4,6 +4,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { loadRoutes, deleteRoute } from '../../store/action/route.action';
 import { RouteItem } from './RouteItem';
+import { PlaceDto } from '../../dto/place.dto';
+import { ajax } from 'rxjs/ajax';
+import { map, publishReplay, refCount, switchMap } from 'rxjs/operators';
+import { Observable, timer } from 'rxjs';
 
 export interface  ComponentProps {
     routes: RouteDto[];
@@ -12,6 +16,8 @@ export interface  ComponentProps {
 }
 
 export class RouteList extends React.Component<ComponentProps, {}> {
+    placeDto$: Observable<PlaceDto[]>;
+
     constructor(props: ComponentProps) {
         super(props);
 
@@ -26,13 +32,31 @@ export class RouteList extends React.Component<ComponentProps, {}> {
         this.props.loadRoutes();
     }
 
+    private requestPlaces(): Observable<PlaceDto[]> {
+        return ajax.getJSON('http://localhost:5000/api/place').pipe(
+            map(result => {
+                console.log(result);
+                return result as PlaceDto[];
+            })
+        );
+    }
+
+    getPlaces(): Observable<PlaceDto[]> {
+        const timer$ = timer(0, 10000);
+        
+        if (!this.placeDto$) {
+            this.placeDto$ = timer$.pipe(
+                switchMap(() => this.requestPlaces()),
+                publishReplay(1),
+                refCount()
+            );
+        }
+        return this.placeDto$;
+    }
+
     delProd(id: string) {
         this.props.deleteProduct(id);
     }
-
-    renderChildren = () => this.props.routes.map((x, i) => {
-        return i % 2 === 0 ? this.props.routes!.slice(i, i + 2) : null;
-    }).filter(x => x != null);
 
     render() {
         if (this.props.routes) {
@@ -41,7 +65,7 @@ export class RouteList extends React.Component<ComponentProps, {}> {
                     {this.props.routes.map((result, index) => {
                         return result
                             ? ([<div className="row" key={'row' + index}>
-                                <RouteItem key={`elem${index}`} route={result} onDelete={this.delProd} />
+                                <RouteItem key={`elem${index}`} route={result} onDelete={this.delProd} places={this.getPlaces()} />
                             </div>,
                             <div key={'emp-row' + index} className="row">&nbsp;</div>])
                             : null;

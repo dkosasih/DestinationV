@@ -86,7 +86,7 @@ namespace DestinationV.Persistence.Tests.Repositories
         }
 
         [TestMethod]
-        public async Task GivenProduct_AddProduct_NewProductAdded()
+        public async Task GivenProduct_AddRoute_NewRouteAdded()
         {
             // Arrange
             var traralgon = new Place {Id = "Station0118", Name = "Traralgon"};
@@ -114,7 +114,7 @@ namespace DestinationV.Persistence.Tests.Repositories
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException), "Route exists")]
-        public async Task GivenProductWithSameId_AddProduct_ExceptionThrown()
+        public async Task GivenProductWithSameId_AddRoute_ExceptionThrown()
         {
             // Arrange
             var traralgon = new Place {Id = "Station0118", Name = "Traralgon"};
@@ -135,7 +135,7 @@ namespace DestinationV.Persistence.Tests.Repositories
         }
 
         [TestMethod]
-        public async Task GivenProductAndId_UpdateProduct_ProductUpdated()
+        public async Task GivenProductAndId_UpdateRoute_RouteUpdated()
         {
             // Arrange
             var somewhere = new Place {Id = "Station20000", Name = "SomewhereElse"};

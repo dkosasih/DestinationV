@@ -5,7 +5,7 @@ using DestinationV.Domain.Entity.RouteEntity;
 
 namespace DestinationV.Application.Tests.Helper
 {
-   public static class RouteHelper
+   public static class RoutePlaceMockHelper
     {
         public static IList<Route> CreateMockRoutes()
         {
@@ -35,6 +35,20 @@ namespace DestinationV.Application.Tests.Helper
             };
 
             return routes;
+        }
+
+        public static IList<Place> CreateMockPlaces()
+        {
+            var traralgon = new Place { Id = "Station0118", Name = "Traralgon" };
+            var sthCross = new Place { Id = "Station0001", Name = "Southern Cross" };
+
+            var places = new List<Place>
+            {
+                traralgon,
+                sthCross
+            };
+
+            return places;
         }
     }
 }

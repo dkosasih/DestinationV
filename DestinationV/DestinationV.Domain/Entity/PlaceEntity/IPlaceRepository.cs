@@ -8,5 +8,6 @@ namespace DestinationV.Domain.Entity.PlaceEntity
 {
     public interface IPlaceRepository : IRepository<Place>
     {
+        Task<IList<Place>> GetAll();
     }
 }
