@@ -67,8 +67,6 @@ namespace DestinationV.Application.Tests.Queries
             Assert.AreEqual(result.Origin.Id, "efg");
             Assert.AreEqual(result.Destination.Id, "abc");
             Assert.AreEqual(result.DepartUtc, new DateTime(2018, 12, 1, 14, 15, 00).ToUniversalTime());
-        }
-
-        
+        }        
     }
 }
