@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'destinationv-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
   private unsubscribe: Subject<boolean> = new Subject<boolean>();

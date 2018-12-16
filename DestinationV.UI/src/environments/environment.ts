@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiHost: 'https://localhost:44302/',
+  apiHost: 'https://localhost:5001/',
   timezone: 'Asia/Jakarta',
 };
 

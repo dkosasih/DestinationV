@@ -6,7 +6,6 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap';
 import { RouteDto } from '../../dtos/route.dto';
 
 
@@ -26,7 +25,7 @@ export class RouteDetailsComponent implements OnInit {
   @Output()
   result: EventEmitter<RouteDetailsAnswer> = new EventEmitter();
 
-  constructor(private modalServiceRef: BsModalRef) {}
+  constructor() {}
 
   deleteClick() {
     this.result.emit({buttonType: 'delete'});
@@ -44,7 +43,7 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   dismiss() {
-    this.modalServiceRef.hide();
+    //this.modalServiceRef.hide();
   }
 
   ngOnInit() {}

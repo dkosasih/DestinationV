@@ -6,8 +6,8 @@ import { loadRoutes, deleteRoute } from '../../store/action/route.action';
 import { RouteItem } from './RouteItem';
 import { PlaceDto } from '../../dto/place.dto';
 import { ajax } from 'rxjs/ajax';
-import { map, publishReplay, refCount, switchMap } from 'rxjs/operators';
-import { Observable, timer } from 'rxjs';
+import { map, publishReplay, refCount } from 'rxjs/operators';
+import { Observable,  } from 'rxjs';
 
 export interface  ComponentProps {
     routes: RouteDto[];
@@ -34,19 +34,13 @@ export class RouteList extends React.Component<ComponentProps, {}> {
 
     private requestPlaces(): Observable<PlaceDto[]> {
         return ajax.getJSON('http://localhost:5000/api/place').pipe(
-            map(result => {
-                console.log(result);
-                return result as PlaceDto[];
-            })
+            map(result => result as PlaceDto[])
         );
     }
 
     getPlaces(): Observable<PlaceDto[]> {
-        const timer$ = timer(0, 10000);
-        
         if (!this.placeDto$) {
-            this.placeDto$ = timer$.pipe(
-                switchMap(() => this.requestPlaces()),
+            this.placeDto$ = this.requestPlaces().pipe(
                 publishReplay(1),
                 refCount()
             );
