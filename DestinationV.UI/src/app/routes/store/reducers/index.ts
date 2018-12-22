@@ -13,5 +13,5 @@ export const routesReducer: ActionReducerMap<RouteState> = {
 // create feature selector
 const getRoutesState = createFeatureSelector<RouteState>('routesReducer');
 
-// allow root to select the residentdto: this would have to be added as the dto to get grows
+// allow root to select the dto: this would have to be added as the dto to get grows
 export const getRoutes = createSelector(getRoutesState, (routeState: RouteState) => routeState.routes);

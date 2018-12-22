@@ -1,0 +1,28 @@
+
+@import '../node_modules/bootstrap/scss/bootstrap-reboot';
+@import '../node_modules/bootstrap/scss/bootstrap-grid';
+
+// @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+@import '~@angular/material/theming';
+
+@import './destinationv.theme.scss';
+@import './app/app.component.theme.scss';
+@import './app/routes/routes.module.theme.scss';
+
+@mixin custom-components-theme($theme) {
+  @include destinationv-routes-module-theme($theme);
+  @include destinationv-app-component-theme($theme);
+}
+
+// Theme Init
+.default-theme {
+  @include angular-material-theme($theme);
+  @include custom-components-theme($theme);
+
+}
+
+.theme-alternate {
+  @include angular-material-theme($altTheme);
+  @include custom-components-theme($altTheme);
+}

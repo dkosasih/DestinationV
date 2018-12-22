@@ -6,8 +6,8 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap';
 import { RouteDto } from '../../dtos/route.dto';
+import { PlaceDto } from 'src/app/common/dtos/place.dto';
 
 
 export interface RouteDetailsAnswer {
@@ -16,17 +16,22 @@ export interface RouteDetailsAnswer {
 }
 
 @Component({
+  selector: 'destinationv-route-item',
   templateUrl: './route-details.component.html',
+  styleUrls: ['./route-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RouteDetailsComponent implements OnInit {
   @Input()
-  dto: RouteDto;
+  route: RouteDto;
+
+  @Input()
+  places: PlaceDto[];
 
   @Output()
   result: EventEmitter<RouteDetailsAnswer> = new EventEmitter();
 
-  constructor(private modalServiceRef: BsModalRef) {}
+  constructor() {}
 
   deleteClick() {
     this.result.emit({buttonType: 'delete'});
@@ -39,12 +44,12 @@ export class RouteDetailsComponent implements OnInit {
   }
 
   edittedClick() {
-    this.result.emit({ buttonType: 'edit', data: this.dto });
+    this.result.emit({ buttonType: 'edit', data: this.route });
     this.dismiss();
   }
 
   dismiss() {
-    this.modalServiceRef.hide();
+    // this.modalServiceRef.hide();
   }
 
   ngOnInit() {}

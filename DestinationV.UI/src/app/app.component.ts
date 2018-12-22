@@ -1,20 +1,21 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'destinationv-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
   private unsubscribe: Subject<boolean> = new Subject<boolean>();
-  isCollapsed = true;
+  thisYear: number;
   currentRoute: string = null;
 
-
   constructor(private router: Router) {
+    this.thisYear = DateTime.local().year;
 
   }
 

@@ -1,21 +1,30 @@
-<div class="modal-body">
-  <div class="container-fluid">
+<div class="container-fluid">
+
+  <div class="col-md-4 form-content">
     <div class="row">
-      <div class="col-md-4">From</div>
-      <div class="col-md-8"><strong>{{dto.origin.name}}</strong></div>
+      <mat-form-field>
+        <mat-label>From</mat-label>
+        <input matInput [value]="route.origin.name" />
+      </mat-form-field>
     </div>
     <div class="row">
-      <div class="col-md-4">To</div>
-      <div class="col-md-8"><strong>{{dto.destination.name}}</strong></div>
+        <mat-form-field>
+            <mat-label>To</mat-label>
+            <mat-select>
+              <mat-option></mat-option>
+              <mat-option *ngFor="let place of places" value="place">{{place.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
     </div>
     <div class="row">
-      <div class="col-md-4">Departure</div>
-      <div class="col-md-8"><strong>{{dto.departUtc | uDate: "dd/MM/yyyy HH:mm"}}</strong></div>
+        <mat-form-field>
+            <mat-label>Departing time</mat-label>
+            <input matInput [value]="route.departUtc | uDate: 'dd/MM/yyyy HH:mm'" />
+          </mat-form-field>
+    </div>
+    <div class="row justify-content-between">
+      <button type="button" mat-raised-button color="warn" (click)="deleteClick()"><mat-icon>delete</mat-icon> Delete</button>
+      <button type="button" mat-raised-button color="primary" class="justify-content-end" (click)="edittedClick()"><mat-icon>save</mat-icon> Save</button>
     </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-danger btn-sm" (click)="deleteClick()">Delete</button>
-  <button type="button" class="btn btn-primary btn-sm" (click)="okClick()">Cancel</button>
-  <button type="button" class="btn btn-success btn-sm" (click)="edittedClick()">Save</button>
 </div>

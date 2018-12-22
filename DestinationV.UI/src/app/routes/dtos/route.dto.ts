@@ -1,4 +1,4 @@
-import { PlaceDto } from './place.dto';
+import { PlaceDto } from '../../common/dtos/place.dto';
 
 export interface RouteDto {
   id: string;

@@ -1,21 +1,31 @@
-<div class="container">
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" (click)="isCollapsed = !isCollapsed" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" [routerLink]="['/']">DestinationV</a>
+<div class="theme-wrapper default-theme ">
+  <mat-sidenav-container>
+    <div class="wrapper">
+      <div class="toolbar">
+        <mat-toolbar color="primary">
+          <span [routerLink]="['/']">DestinationV</span>
+          <span class="title-menu-gap spacer"></span>
+          <button mat-button [routerLink]="['/routes']" routerLinkActive="active">
+            <mat-icon>access_time</mat-icon> Routes
+          </button>
+        </mat-toolbar>
       </div>
-      <div class="collapse navbar-collapse" [collapse]="isCollapsed">
-        <ul class="nav navbar-nav">
-          <li [class.active]="currentRoute === 'routes'"><a [routerLink]="['/routes']">Routes</a></li>
-        </ul>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="footer">
+        <div class="row">
+          <div class="col-sm-12 links">
+            <span>Des</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 signature">
+            &#169; <span class="year" data-testid="footer-year">{{thisYear}}</span> - dKosasih
+            <br class="d-block d-sm-none">
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
-  <router-outlet></router-outlet>
+  </mat-sidenav-container>
 </div>
