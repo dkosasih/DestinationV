@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+
+@mixin destinationv-routes-module-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  destinationv-route-list {
+    button {
+      color: mat-color($primary, main);
+      background-color: transparent;
+    }
+  }
+}

@@ -9,12 +9,14 @@ import { RouteDetailsComponent } from './components/route-details/route-details.
 import { UserTimezoneDatePipe } from '../common/pipes/user-timezone-date.pipe';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AngularMaterialModule } from '../material.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     HttpClientModule,
+    AngularMaterialModule,
     StoreModule.forFeature('routesReducer', routesReducer),
     EffectsModule.forFeature([RoutesEffects])
   ],
@@ -25,6 +27,5 @@ import { RouterModule } from '@angular/router';
     UserTimezoneDatePipe
   ],
   providers: [],
-  entryComponents: [RouteDetailsComponent]
 })
 export class RoutesModule { }

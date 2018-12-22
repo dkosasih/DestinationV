@@ -1,18 +1,32 @@
 <div class="container-fluid">
-    <h2>Routes</h2>
+  <h2>Routes</h2>
 
-  <div class="row" *ngFor="let route of routeList$ | async">
-      <div class="col-md-3">
-        From: <strong>{{route.origin.name}}</strong>
-      </div>
-      <div class="col-md-3">
-        To: <strong>{{route.destination.name}}</strong>
-      </div>
-      <div class="col-md-4">
-        Departing time: {{route.departUtc | uDate: "dd/MM/yyyy HH:mm"}}
-      </div>
-      <div class="col-md-2">
-        <a class="details-link" (click)="showDetails(route)" routerLinkActive="router-link-active">edit</a>
-      </div>
-  </div>
+  <mat-accordion>
+      <mat-expansion-panel *ngFor="let route of (routeList$ | async)"
+      [expanded]="currentPanelId === route.id"
+      disabled
+      hideToggle>
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+                  <div class="col-md-3 align-self-center">
+                    From: <strong>{{ route.origin.name }}</strong>
+                  </div>
+                  <div class="col-md-3 align-self-center">
+                    To: <strong>{{ route.destination.name }}</strong>
+                  </div>
+                  <div class="col-md-4 align-self-center">
+                    Departing time: {{ route.departUtc | uDate: 'dd/MM/yyyy HH:mm' }}
+                  </div>
+                  <div class="col-md-2 align-self-center">
+                    <button mat-mini-fab color="primary" (click)="setExpandedPanelId(route.id)"><mat-icon>edit</mat-icon></button>
+                  </div>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <destinationv-route-item [route]="route" [places]="placesList$ | async"></destinationv-route-item>
+      </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- <ng-container *ngFor="let route of (routeList$ | async)">
+    <destinationv-route-item [route]="route"></destinationv-route-item>
+  </ng-container> -->
 </div>

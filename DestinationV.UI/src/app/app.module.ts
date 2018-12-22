@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store/reducers';
+import { globalReducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,11 +24,13 @@ import { AngularMaterialModule } from './material.module';
     BrowserModule,
     NoopAnimationsModule,
     AppRoutingModule,
-    RoutesModule,
     AngularMaterialModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    RoutesModule,
+    StoreModule.forRoot(globalReducers, { metaReducers }),
+    StoreModule.forFeature('globalReducer', globalReducers),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([AppEffects]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AppEffects]),
   ],
   providers: [
     { provide: API_HOST, useValue: environment.apiHost },
