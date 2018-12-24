@@ -34,7 +34,7 @@ import { AngularMaterialModule } from './material.module';
   ],
   providers: [
     { provide: API_HOST, useValue: environment.apiHost },
-    { provide: CURRENT_IANA_TIMEZONE, useValue: environment.timezone }
+    { provide: CURRENT_IANA_TIMEZONE, useValue: environment.timezone },
   ],
   bootstrap: [AppComponent]
 })

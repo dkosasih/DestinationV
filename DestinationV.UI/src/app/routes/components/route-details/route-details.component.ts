@@ -4,11 +4,14 @@ import {
   ChangeDetectionStrategy,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  Inject
 } from '@angular/core';
 import { RouteDto } from '../../dtos/route.dto';
 import { PlaceDto } from 'src/app/common/dtos/place.dto';
-
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { utcToLocal, localToUtc } from 'src/app/common/helper/date/date.converter';
+import { CURRENT_IANA_TIMEZONE } from 'src/app/configs/timezone.config';
 
 export interface RouteDetailsAnswer {
   buttonType: string;
@@ -22,8 +25,14 @@ export interface RouteDetailsAnswer {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RouteDetailsComponent implements OnInit {
+  private _route: RouteDto;
   @Input()
-  route: RouteDto;
+  get route(): RouteDto {
+    return this._route;
+  }
+  set route(dto: RouteDto) {
+    this.modelToForm(dto);
+  }
 
   @Input()
   places: PlaceDto[];
@@ -31,25 +40,32 @@ export class RouteDetailsComponent implements OnInit {
   @Output()
   result: EventEmitter<RouteDetailsAnswer> = new EventEmitter();
 
-  constructor() {}
+  form: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    @Inject(CURRENT_IANA_TIMEZONE) private ianaTimezone: string
+  ) {
+    this.form = fb.group({
+      origin: [null, [Validators.required]],
+      destination: [null, [Validators.required]],
+      departLocalTime: [null, [Validators.required]]
+    });
+  }
+
+  private modelToForm(dto: RouteDto): any {
+    this.form.patchValue({
+      origin: dto.origin.id,
+      destination: dto.destination.id,
+      departLocalTime: utcToLocal(dto.departUtc, this.ianaTimezone), // this.uDatePipe.transform(dto.departUtc, 'dd/MM/yyyy HH:mm'),
+    });
+  }
 
   deleteClick() {
     this.result.emit({buttonType: 'delete'});
-    this.dismiss();
-  }
-
-  okClick() {
-    this.result.emit({buttonType: 'ok'});
-    this.dismiss();
   }
 
   edittedClick() {
-    this.result.emit({ buttonType: 'edit', data: this.route });
-    this.dismiss();
-  }
-
-  dismiss() {
-    // this.modalServiceRef.hide();
+    this.result.emit({ buttonType: 'edit', data: this._route });
   }
 
   ngOnInit() {}

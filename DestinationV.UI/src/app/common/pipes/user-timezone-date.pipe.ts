@@ -10,7 +10,7 @@ export class UserTimezoneDatePipe implements PipeTransform {
     @Inject(CURRENT_IANA_TIMEZONE) private ianaTimezone: string
   ) { }
 
-  transform(value: any, format: string): any {
+  transform(value: any, format: string): string {
     if (typeof (value) === 'string') {
       return DateTime.fromISO(value).toUTC().setZone(this.ianaTimezone).toFormat(format);
     } else {

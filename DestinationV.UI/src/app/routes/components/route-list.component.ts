@@ -21,7 +21,8 @@ export class RouteListComponent implements OnInit {
 
   constructor(
     private store: Store<RouteState>,
-    private storeGlobal: Store<GlobalState>,) {
+    private storeGlobal: Store<GlobalState>,
+  ) {
     store.dispatch(new LoadRoutes());
 
     this.routeList$ = store.select(getRoutes);
