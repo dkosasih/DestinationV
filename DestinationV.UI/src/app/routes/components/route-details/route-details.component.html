@@ -1,30 +1,41 @@
 <div class="container-fluid">
-
-  <div class="col-md-4 form-content">
-    <div class="row">
-      <mat-form-field>
-        <mat-label>From</mat-label>
-        <input matInput [value]="route.origin.name" />
-      </mat-form-field>
-    </div>
-    <div class="row">
+  <form [formGroup]="form">
+    <div class="col-md-4 form-content">
+      <div class="row">
         <mat-form-field>
-            <mat-label>To</mat-label>
-            <mat-select>
-              <mat-option></mat-option>
-              <mat-option *ngFor="let place of places" value="place">{{place.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-    </div>
-    <div class="row">
+          <mat-label>From*</mat-label>
+          <mat-select formControlName="origin">
+            <mat-option></mat-option>
+            <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['origin'].touched && form.controls['origin'].hasError('required')">Required fields</mat-error>
+        </mat-form-field>
+      </div>
+      <br />
+      <div class="row">
         <mat-form-field>
-            <mat-label>Departing time</mat-label>
-            <input matInput [value]="route.departUtc | uDate: 'dd/MM/yyyy HH:mm'" />
-          </mat-form-field>
+          <mat-label>To*</mat-label>
+          <mat-select formControlName="destination">
+            <mat-option></mat-option>
+            <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.controls['destination'].touched && form.controls['destination'].hasError('required')">Required fields</mat-error>
+        </mat-form-field>
+      </div>
+      <br />
+      <div class="row">
+        <mat-form-field>
+          <input matInput [matDatepicker]="dp" formControlName="departLocalTime">
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker #dp></mat-datepicker>
+          <mat-error *ngIf="form.controls['departLocalTime'].touched && form.controls['departLocalTime'].hasError('required')">Required fields</mat-error>
+        </mat-form-field>
+      </div>
+      <br />
+      <div class="row justify-content-between">
+        <button type="button" mat-raised-button color="warn" (click)="deleteClick()"><mat-icon>delete</mat-icon> Delete</button>
+        <button type="button" mat-raised-button color="primary" class="justify-content-end" (click)="edittedClick()"><mat-icon>save</mat-icon> Save</button>
+      </div>
     </div>
-    <div class="row justify-content-between">
-      <button type="button" mat-raised-button color="warn" (click)="deleteClick()"><mat-icon>delete</mat-icon> Delete</button>
-      <button type="button" mat-raised-button color="primary" class="justify-content-end" (click)="edittedClick()"><mat-icon>save</mat-icon> Save</button>
-    </div>
-  </div>
+  </form>
 </div>
