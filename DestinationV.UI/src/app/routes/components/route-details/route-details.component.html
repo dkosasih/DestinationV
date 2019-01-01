@@ -25,9 +25,22 @@
       <br />
       <div class="row">
         <mat-form-field>
-          <input matInput [matDatepicker]="dp" formControlName="departLocalTime">
+          <input matInput [matDatepicker]="dp" formControlName="departLocalTime"  (dateChange)="departDateChange()">
           <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
           <mat-datepicker #dp></mat-datepicker>
+          <input type="hidden" [ngxTimepicker]="toggleTimepicker" [disableClick]="true" [format]="24" readonly>
+          <ngx-material-timepicker #toggleTimepicker
+          [ESC]="false"
+          (timeSet)="setTimeInput($event)"
+          [cancelBtnTmpl]="cancelBtn"
+          [confirmBtnTmpl]="confirmBtn"
+          ></ngx-material-timepicker>
+          <ng-template #cancelBtn>
+            <button mat-button>Cancel</button>
+          </ng-template>
+          <ng-template #confirmBtn>
+            <button mat-button>Set</button>
+          </ng-template>
           <mat-error *ngIf="form.controls['departLocalTime'].touched && form.controls['departLocalTime'].hasError('required')">Required fields</mat-error>
         </mat-form-field>
       </div>

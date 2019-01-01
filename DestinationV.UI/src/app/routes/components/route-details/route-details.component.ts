@@ -1,11 +1,11 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   Input,
   Output,
   EventEmitter,
-  Inject
+  Inject,
+  ViewChild
 } from '@angular/core';
 import { RouteDto } from '../../dtos/route.dto';
 import { PlaceDto } from 'src/app/common/dtos/place.dto';
@@ -24,7 +24,7 @@ export interface RouteDetailsAnswer {
   styleUrls: ['./route-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RouteDetailsComponent implements OnInit {
+export class RouteDetailsComponent {
   private _route: RouteDto;
   @Input()
   get route(): RouteDto {
@@ -39,6 +39,9 @@ export class RouteDetailsComponent implements OnInit {
 
   @Output()
   result: EventEmitter<RouteDetailsAnswer> = new EventEmitter();
+
+  @ViewChild('toggleTimepicker')
+  tp: any /*NgxMaterialTimepickerComponent*/;
 
   form: FormGroup;
   constructor(
@@ -68,5 +71,19 @@ export class RouteDetailsComponent implements OnInit {
     this.result.emit({ buttonType: 'edit', data: this._route });
   }
 
-  ngOnInit() {}
+  departDateChange() {
+    this.tp.open();
+  }
+
+  setTimeInput(event) {
+    const localTime = this.form.controls['departLocalTime'].value as Date;
+    const hourMinute = event.split(':');
+
+    localTime.setHours(parseInt(hourMinute[0]));
+    localTime.setMinutes(parseInt(hourMinute[1]));
+
+    this.form.patchValue({
+      departLocalTime: localTime
+    });
+  }
 }
