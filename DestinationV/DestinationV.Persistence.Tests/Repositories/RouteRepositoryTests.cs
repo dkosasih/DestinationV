@@ -54,8 +54,8 @@ namespace DestinationV.Persistence.Tests.Repositories
             var route = await _routeRepository.GetById(searchId);
 
             //Assert
-            Assert.AreEqual(route.Origin.Name, "Southern Cross");
-            Assert.AreEqual(route.Destination.Name, "Traralgon");
+            Assert.AreEqual(route.Origin.Name, "Winchester");
+            Assert.AreEqual(route.Destination.Name, "Union Street");
         }
 
         [TestMethod]
@@ -89,8 +89,8 @@ namespace DestinationV.Persistence.Tests.Repositories
         public async Task GivenProduct_AddRoute_NewRouteAdded()
         {
             // Arrange
-            var traralgon = new Place {Id = "Station0118", Name = "Traralgon"};
-            var sthCross = new Place {Id = "Station0001", Name = "Southern Cross"};
+            var traralgon = new Place {Id = "Station0118", Name = "Union Street"};
+            var sthCross = new Place {Id = "Station0001", Name = "Winchester"};
 
             var routeToInsert = new Route
             {
@@ -117,8 +117,8 @@ namespace DestinationV.Persistence.Tests.Repositories
         public async Task GivenProductWithSameId_AddRoute_ExceptionThrown()
         {
             // Arrange
-            var traralgon = new Place {Id = "Station0118", Name = "Traralgon"};
-            var sthCross = new Place {Id = "Station0001", Name = "Southern Cross"};
+            var traralgon = new Place {Id = "Station0118", Name = "Union Street"};
+            var sthCross = new Place {Id = "Station0001", Name = "Winchester"};
 
             var routeToInsert = new Route
             {

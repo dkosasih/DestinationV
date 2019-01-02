@@ -15,11 +15,11 @@ namespace DestinationV.Persistence.Tests.Helper
             context.Places.RemoveRange(context.Places);
             context.SaveChanges();
 
-            var traralgon = new Place { Id = "Station0118", Name = "Traralgon" };
-            var sthCross = new Place { Id = "Station0001", Name = "Southern Cross" };
+            var unionSt = new Place { Id = "Station0118", Name = "Union Street" };
+            var winchester = new Place { Id = "Station0001", Name = "Winchester" };
 
-            context.Places.Add(traralgon);
-            context.Places.Add(sthCross);
+            context.Places.Add(unionSt);
+            context.Places.Add(winchester);
             context.SaveChanges();
 
             var routes = new List<Route>
@@ -27,15 +27,15 @@ namespace DestinationV.Persistence.Tests.Helper
                 new Route
                 {
                     Id = "trl-sthcrs",
-                    OriginId = traralgon.Id,
-                    DestinationId = sthCross.Id,
+                    OriginId = unionSt.Id,
+                    DestinationId = winchester.Id,
                     DepartUtc = (new DateTime(2018, 09, 01))
                 },
                 new Route
                 {
                     Id = "sthcrs-trl",
-                    OriginId = sthCross.Id,
-                    DestinationId = traralgon.Id,
+                    OriginId = winchester.Id,
+                    DestinationId = unionSt.Id,
                     DepartUtc = (new DateTime(2018, 10, 01))
                 }
             };
