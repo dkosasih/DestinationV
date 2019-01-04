@@ -8,11 +8,13 @@
 
 @import './destinationv.theme.scss';
 @import './app/app.component.theme.scss';
+@import './app/app.timepicker.theme.scss';
 @import './app/routes/routes.module.theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include destinationv-routes-module-theme($theme);
   @include destinationv-app-component-theme($theme);
+  @include destinationv-app-timepicker-theme($theme);
 }
 
 // Theme Init

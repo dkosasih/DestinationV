@@ -2,7 +2,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {
   MatAutocompleteModule,
   MatBadgeModule,
@@ -42,6 +43,9 @@ import {
 } from '@angular/material';
 
 @NgModule({
+  imports: [
+    NgxMaterialTimepickerModule.forRoot()
+  ],
   exports: [
     CdkTableModule,
     CdkTreeModule,
@@ -82,6 +86,7 @@ import {
     MatTooltipModule,
     MatTreeModule,
     ScrollingModule,
+    NgxMaterialTimepickerModule
   ]
 })
 export class AngularMaterialModule { }

@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+@mixin destinationv-app-timepicker-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .timepicker {
+    .timepicker__header {
+      background-color: mat-color($primary, darker);
+    }
+
+    .clock-face__clock-hand {
+      background-color: mat-color($primary, darker);
+
+      &::after {
+        background-color: mat-color($primary, darker);
+      }
+
+      &::before {
+        border-color: mat-color($primary, darker);
+      }
+    }
+
+    .clock-face__number {
+      > span.active {
+        background-color: mat-color($primary, darker) !important;
+      }
+
+      > span {
+        color: mat-color($primary, lighter) !important;
+      }
+    }
+
+    .timepicker__body {
+      background-color: mat-color($accent);
+    }
+
+    .clock-face {
+      background-color: mat-color($accent, darker);
+    }
+
+    .timepicker__actions {
+      background-color: mat-color($primary, darker);
+    }
+  }
+}
