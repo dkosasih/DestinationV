@@ -8,21 +8,21 @@
       hideToggle>
       <mat-expansion-panel-header>
           <mat-panel-title>
-                  <div class="col-md-3 align-self-center">
-                    From: <strong>{{ route.origin.name }}</strong>
+                  <div class="col-md-3 align-self-center" data-testId="routeOrigin">
+                    Origin: <strong>{{ route.origin.name }}</strong>
                   </div>
-                  <div class="col-md-3 align-self-center">
-                    To: <strong>{{ route.destination.name }}</strong>
+                  <div class="col-md-3 align-self-center" data-testId="routeDestination">
+                    Destination: <strong>{{ route.destination.name }}</strong>
                   </div>
-                  <div class="col-md-4 align-self-center">
+                  <div class="col-md-4 align-self-center" data-testId="routeDate">
                     Departing time: {{ route.departUtc | uDate: 'dd/MM/yyyy HH:mm' }}
                   </div>
                   <div class="col-md-2 align-self-center">
-                    <button mat-mini-fab color="primary" (click)="setExpandedPanelId(route.id)"><mat-icon>edit</mat-icon></button>
+                    <button data-testId="buttonEdit" mat-mini-fab color="primary" (click)="setExpandedPanelId(route.id)"><mat-icon>edit</mat-icon></button>
                   </div>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <destinationv-route-item [route]="route" [places]="placesList$ | async"></destinationv-route-item>
+        <destinationv-route-item [route]="route" [places]="placesList$ | async" (result)="actionOnResult($event)"></destinationv-route-item>
       </mat-expansion-panel>
   </mat-accordion>
 </div>

@@ -3,7 +3,7 @@
     <div class="col-md-4 form-content">
       <div class="row">
         <mat-form-field>
-          <mat-label>From*</mat-label>
+          <mat-label>Origin*</mat-label>
           <mat-select formControlName="origin">
             <mat-option></mat-option>
             <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}</mat-option>
@@ -14,7 +14,7 @@
       <br />
       <div class="row">
         <mat-form-field>
-          <mat-label>To*</mat-label>
+          <mat-label>Destination*</mat-label>
           <mat-select formControlName="destination">
             <mat-option></mat-option>
             <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}</mat-option>
@@ -25,7 +25,7 @@
       <br />
       <div class="row">
         <mat-form-field>
-          <input matInput [matDatepicker]="dp" formControlName="departLocalTime"  (dateChange)="departDateChange()">
+          <input matInput [readonly]="true" [matDatepicker]="dp" (click)="dp.open()" formControlName="departLocalTime" (dateChange)="departDateChange($event)">
           <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
           <mat-datepicker #dp></mat-datepicker>
           <input type="hidden" [ngxTimepicker]="toggleTimepicker" [disableClick]="true" [format]="24" readonly>
@@ -46,8 +46,8 @@
       </div>
       <br />
       <div class="row justify-content-between">
-        <button type="button" mat-raised-button color="warn" (click)="deleteClick()"><mat-icon>delete</mat-icon> Delete</button>
-        <button type="button" mat-raised-button color="primary" class="justify-content-end" (click)="edittedClick()"><mat-icon>save</mat-icon> Save</button>
+        <button data-testId="deleteRouteButton" type="button" mat-raised-button color="warn" (click)="deleteClick()"><mat-icon>delete</mat-icon> Delete</button>
+        <button data-testId="saveRouteButton" type="button" mat-raised-button color="primary" class="justify-content-end" (click)="edittedClick()"><mat-icon>save</mat-icon> Save</button>
       </div>
     </div>
   </form>

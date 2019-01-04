@@ -5,17 +5,20 @@ import {
   Output,
   EventEmitter,
   Inject,
-  ViewChild
+  ViewChild,
+  OnDestroy
 } from '@angular/core';
 import { RouteDto } from '../../dtos/route.dto';
 import { PlaceDto } from 'src/app/common/dtos/place.dto';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { utcToLocal, localToUtc } from 'src/app/common/helper/date/date.converter';
 import { CURRENT_IANA_TIMEZONE } from 'src/app/configs/timezone.config';
+import { OperationType } from 'src/app/common/constants/operation-type.constant';
+import { Subject } from 'rxjs';
 
 export interface RouteDetailsAnswer {
   buttonType: string;
-  data?: RouteDto;
+  data: RouteDto;
 }
 
 @Component({
@@ -24,13 +27,16 @@ export interface RouteDetailsAnswer {
   styleUrls: ['./route-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RouteDetailsComponent {
+export class RouteDetailsComponent implements OnDestroy {
+  private destroySubject: Subject<void> = new Subject<void>();
+
   private _route: RouteDto;
   @Input()
   get route(): RouteDto {
     return this._route;
   }
   set route(dto: RouteDto) {
+    this._route = dto;
     this.modelToForm(dto);
   }
 
@@ -63,19 +69,30 @@ export class RouteDetailsComponent {
     });
   }
 
+  private formToModel(): RouteDto {
+    const model: RouteDto = {
+      id: this.route.id,
+      origin: this.places.find(x => x.id === this.form.controls['origin'].value),
+      destination: this.places.find(x => x.id === this.form.controls['destination'].value),
+      departUtc: localToUtc(this.form.controls['departLocalTime'].value, this.ianaTimezone) as unknown as Date
+    }
+    return model;
+  }
+
   deleteClick() {
-    this.result.emit({buttonType: 'delete'});
+    this.result.emit({buttonType: OperationType.DELETE, data: this.route});
   }
 
   edittedClick() {
-    this.result.emit({ buttonType: 'edit', data: this._route });
+    const model = this.formToModel();
+    this.result.emit({ buttonType: OperationType.UPDATE, data: model });
   }
 
-  departDateChange() {
+  departDateChange(event) {
     this.tp.open();
   }
 
-  setTimeInput(event) {
+  setTimeInput(event: string) {
     const localTime = this.form.controls['departLocalTime'].value as Date;
     const hourMinute = event.split(':');
 
@@ -85,5 +102,9 @@ export class RouteDetailsComponent {
     this.form.patchValue({
       departLocalTime: localTime
     });
+  }
+
+  ngOnDestroy() {
+    this.destroySubject.next();
   }
 }

@@ -5,7 +5,9 @@ export enum RouteTypes {
   LoadRoutes = '[Routes] Load',
   LoadRoutesComplete = '[Routes] Load Complete',
   DeleteRoute = '[Route] Delete',
-  DeleteRouteComplete = '[Route] Delete Complete'
+  DeleteRouteComplete = '[Route] Delete Complete',
+  UpdateRoute = '[Route] Update',
+  UpdateComplete = '[Route] Update Complete',
 }
 
 export class LoadRoutes {
@@ -27,5 +29,16 @@ export class DeleteRouteComplete {
   constructor(public payload: ActionResult<string>) { }
 }
 
+export class UpdateRoute {
+  readonly type = RouteTypes.UpdateRoute;
+  constructor(public payload: RouteDto) { }
+}
+
+export class UpdateRouteComplete {
+  readonly type = RouteTypes.UpdateComplete;
+  constructor(public payload: ActionResult<RouteDto>) { }
+}
+
 export type RouteActions = LoadRoutes | LoadRouteComplete |
-  DeleteRoute | DeleteRouteComplete;
+  DeleteRoute | DeleteRouteComplete |
+  UpdateRoute | UpdateRouteComplete;

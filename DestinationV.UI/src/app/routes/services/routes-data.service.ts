@@ -20,4 +20,8 @@ export class RouteDataService extends BaseDataService {
   deleteRoute(id: string) {
     return this.baseHttpDelete(`${this.baseRouteUrl}/${id}`);
   }
+
+  updateRoute(id: string, route: RouteDto) {
+    return this.baseHttpPut(`${this.baseRouteUrl}/${id}`, route);
+  }
 }

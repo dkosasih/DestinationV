@@ -11,7 +11,13 @@ export function routesReducerFn(state = initialState, action: RouteActions): Rou
       if (action.payload.isSuccess) {
         return state.filter(x => x.id !== action.payload.payload);
       }
-        return state;
+      return state;
+    case RouteTypes.UpdateComplete:
+      if (action.payload.isSuccess) {
+        const withoutEdited = state.filter(x => x.id !== action.payload.payload.id);
+        return [...withoutEdited, action.payload.payload]
+      }
+      return state;
     default:
       return state;
   }
