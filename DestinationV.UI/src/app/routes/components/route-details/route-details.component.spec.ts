@@ -28,7 +28,7 @@ const mockRoute: RouteDto = {
 };
 
 const mockPlaces = [{
-  id: 'abc',
+  id: 'abcd',
   name: 'some origin'
 },
 {
