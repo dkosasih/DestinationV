@@ -1,15 +1,17 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Injector } from '@angular/core';
+import { Injector, Injectable } from '@angular/core';
 import { API_HOST } from 'src/app/configs/api-host.config';
+import { SnackBarService } from './snackbar.service';
 
 export class BaseDataService {
   private readonly headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   private host: string;
 
   constructor(private baseHttp: HttpClient,
-    injector: Injector
+    injector: Injector,
+    private snackBarService: SnackBarService
   ) {
     const apiHost = injector.get(API_HOST);
     this.host = apiHost;
@@ -27,6 +29,8 @@ export class BaseDataService {
       } else {
         errMsg = error.message ? error.message : error.toString();
       }
+
+      this.snackBarService.error(`Error: ${errMsg}`);
       return throwError({ message: errMsg });
     };
   }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { BaseDataService } from '../../common/services/base.data.service';
 import { RouteDto } from '../dtos/route.dto';
 import { Injectable, Injector } from '@angular/core';
+import { SnackBarService } from 'src/app/common/services/snackbar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,8 @@ import { Injectable, Injector } from '@angular/core';
 export class RouteDataService extends BaseDataService {
   private readonly baseRouteUrl = 'api/route';
 
-  constructor(baseHttp: HttpClient, injector: Injector) {
-    super(baseHttp, injector);
+  constructor(baseHttp: HttpClient, injector: Injector, snackBarService: SnackBarService) {
+    super(baseHttp, injector, snackBarService);
   }
 
   getRoutes() {
