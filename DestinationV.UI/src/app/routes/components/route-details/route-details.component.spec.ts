@@ -55,19 +55,18 @@ describe('RouteDetailsComponent', () => {
         RouteDetailsComponent,
         UserTimezoneDatePipe,
       ],
-     // schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
   }));
 
 
 
-  it('should create the component', () => {
+  test('should create the component', () => {
     const fixture = TestBed.createComponent(RouteDetailsComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should emit a button type 'delete' on button click`, (done) => {
+  test(`should emit a button type 'delete' on button click`, (done) => {
     const fixture = TestBed.createComponent(RouteDetailsComponent);
     const compiled = fixture.debugElement.nativeElement;
 
@@ -84,7 +83,7 @@ describe('RouteDetailsComponent', () => {
     compiled.querySelector('button[data-testId="deleteRouteButton"]').click();
   });
 
-  it(`should emit a button type 'update' and edited route value on button click`, (done) => {
+  test(`should emit a button type 'update' and edited route value on button click`, (done) => {
     const fixture = TestBed.createComponent(RouteDetailsComponent);
     const compiled = fixture.debugElement.nativeElement;
 
