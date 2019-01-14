@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
@@ -25,7 +25,7 @@ import { AngularMaterialModule } from './material.module';
     NoopAnimationsModule,
     AppRoutingModule,
     AngularMaterialModule,
-    RoutesModule,
+    HttpClientModule,
     StoreModule.forRoot(globalReducers, { metaReducers }),
     StoreModule.forFeature('globalReducer', globalReducers),
     EffectsModule.forRoot([]),
