@@ -41,6 +41,7 @@ export class RouteListComponent implements OnInit {
     } else if (event.buttonType === OperationType.UPDATE){
       this.store.dispatch(new UpdateRoute(event.data));
     }
+    this.currentPanelId = null;
   }
 
   setExpandedPanelId(routeId: string) {

@@ -40,11 +40,15 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
 } from '@angular/material';
 
 @NgModule({
   imports: [
     NgxMaterialTimepickerModule.forRoot()
+  ],
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 3000 } }
   ],
   exports: [
     CdkTableModule,
