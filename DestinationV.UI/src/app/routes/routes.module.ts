@@ -9,21 +9,27 @@ import { RouteListComponent } from './components/route-list.component';
 import { RouteDetailsComponent } from './components/route-details/route-details.component';
 import { UserTimezoneDatePipe } from '../common/pipes/user-timezone-date.pipe';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AngularMaterialModule } from '../material.module';
 import { DateAdapter } from '@angular/material';
 import { DestVDateAdapter } from '../common/helper/date/date-adapter';
 
+const routes: Routes = [
+  {
+    path: '',
+    component: RouteListComponent
+  }
+]
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
+    RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     AngularMaterialModule,
     StoreModule.forFeature('routesReducer', routesReducer),
-    EffectsModule.forFeature([RoutesEffects])
+    EffectsModule.forFeature([RoutesEffects]),
   ],
   declarations: [
     RouteListComponent,

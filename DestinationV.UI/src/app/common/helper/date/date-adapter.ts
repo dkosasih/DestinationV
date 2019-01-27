@@ -1,6 +1,10 @@
+import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 import { NativeDateAdapter } from '@angular/material';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class DestVDateAdapter extends NativeDateAdapter {
   format(date: Date, displayFormat: Object): string {
     const day = date.getDate();
