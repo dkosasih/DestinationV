@@ -1,5 +1,3 @@
-import 'bootstrap3/dist/css/bootstrap-theme.css';
-import 'bootstrap3/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';

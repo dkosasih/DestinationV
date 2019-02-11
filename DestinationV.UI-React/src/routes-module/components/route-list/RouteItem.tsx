@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { RouteDto } from '../../dto/route.dto';
-import { Modal } from 'react-bootstrap';
+// import { Modal } from 'react-bootstrap';
 import { PlaceDto } from '../../dto/place.dto';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
+// import { Button } from '@material-ui/core';
 
 interface RouteItemProps {
     route: RouteDto;
@@ -14,7 +15,7 @@ interface RouteItemProps {
 export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: boolean, [key:string]: string | boolean }> {
     private destroy$: Subject<void> = new Subject<void>();
     private route = this.props.route;
-    private places: PlaceDto[] = [];
+    // private places: PlaceDto[] = [];
 
 
     constructor(props: any) {
@@ -31,7 +32,7 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
         this.handleInputChange = this.handleInputChange.bind(this);
         this.props.places.pipe(
             takeUntil(this.destroy$),
-            tap(x => { this.places = x })
+            // tap(x => { this.places = x })
         ).subscribe();
     }
 
@@ -83,7 +84,7 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
                     </a>
                 </div>
                 </div>
-                <Modal show={this.state.modalShow} onHide={this.hideModal} backdrop={'static'}>
+                {/* <Modal show={this.state.modalShow} onHide={this.hideModal} backdrop={'static'}>
                     <Modal.Body>
                         <form>
                             <div className="container-fluid">
@@ -119,11 +120,11 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <button className="btn btn-danger btn-sm" onClick={this.handleDelete}>Delete</button>
+                        <Button variant="contained" color="primary" onClick={this.handleDelete}>Delete</Button>
                         <button className="btn btn-primary btn-sm" onClick={this.hideModal}>Cancel</button>
                         <button className="btn btn-success btn-sm" onClick={this.hideModal}>Save</button>
                     </Modal.Footer>
-                </Modal>
+                </Modal> */}
             </div>
         );
     }

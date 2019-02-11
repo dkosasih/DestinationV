@@ -1,9 +1,11 @@
 import React from 'react';
-
 import { PureComponent } from 'react';
-import Nav from 'react-bootstrap/lib/Nav';
-import Navbar from 'react-bootstrap/lib/Navbar';
-import NavItem from 'react-bootstrap/lib/NavItem';
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 import './TitleBar.scss';
 
 class TitleBar extends PureComponent<any> {
@@ -12,19 +14,15 @@ class TitleBar extends PureComponent<any> {
     }
 
     render() {
-        return (
-            <Navbar>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <a className="logo" onClick={() => this.goTo('')}>
-                            DestinationV
-                        </a>
-                    </Navbar.Brand>
-                </Navbar.Header>
-                <Nav>
-                    <NavItem eventKey={1} onClick={() => this.goTo('routes')}>All Schedule</NavItem>
-                </Nav>
-            </Navbar>
+        return (            
+            <AppBar position="fixed" color="primary">
+                <Toolbar>
+                    <Typography variant="h6" color="inherit" className="logo right-menu" onClick={() => this.goTo('')}>
+                        DestinationV
+                        </Typography>
+                    <Button color="inherit" onClick={() => this.goTo('routes')}>Route</Button>
+                </Toolbar>
+            </AppBar>
         );
     }
 }
