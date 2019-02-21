@@ -12,21 +12,29 @@ import { Observable, } from 'rxjs';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createStyles, WithStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { CssBaseline } from '@material-ui/core';
 
+const styles = (theme: any) => createStyles({
+    // Look at here: applied specific styles to resizing and background
+    'typeWhite': {
+        'color': 'white'
+    }
+});
+
+// const test = { [className in keyof typeof styles]: string };
+// type ClassNames = { classes: test };
   
-export interface  ComponentProps {
+export interface  ComponentProps  extends WithStyles<typeof styles>{
     routes: RouteDto[];
     loadRoutes: Function;
     deleteProduct: (id: string) => void;
 }
 
-export class RouteList extends React.Component<ComponentProps & ClassNames, {}> {
+export class RouteList extends React.Component<ComponentProps, {}> {
     placeDto$: Observable<PlaceDto[]>;
 
-    constructor(props: ComponentProps & ClassNames) {
+    constructor(props: ComponentProps) {
         super(props);
 
         this.delProd = this.delProd.bind(this);
@@ -70,7 +78,7 @@ export class RouteList extends React.Component<ComponentProps & ClassNames, {}> 
                     // onChange={this.handleChange('panel1')}
                     >
                         <ExpansionPanelSummary>
-                            <Typography className="typo-white">
+                            <Typography className={this.props.classes.typeWhite}>
                         DestinationV
                         </Typography>
                         </ExpansionPanelSummary>
@@ -92,14 +100,6 @@ export class RouteList extends React.Component<ComponentProps & ClassNames, {}> 
         }
     }
 }
-
-const styles = (theme: any) => ({
-    // Look at here: applied specific styles to resizing and background
-    typeWhite: {
-        color: 'white'
-    }
-});
-type ClassNames = { classes: { [className in keyof typeof styles]: string } };
 
 interface OwnProps {
 }

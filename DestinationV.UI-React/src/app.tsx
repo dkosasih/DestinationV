@@ -39,7 +39,7 @@ export const doRoutes = () => {
                         <Route path="/" render={props => <TitleBar {...props} />} />
                     </div>
                     <div className="container content">
-                        <Route path='/routes' render={props => <RouteList {...props} />} />
+                        <Route path='/routes' render={props => <RouteList />} />
                         <Route exact path="/" render={() =>
                             <div className="App">
                                 <header className="App-header">
