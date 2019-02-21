@@ -7,18 +7,26 @@ import { RouteItem } from './RouteItem';
 import { PlaceDto } from '../../dto/place.dto';
 import { ajax } from 'rxjs/ajax';
 import { map, publishReplay, refCount } from 'rxjs/operators';
-import { Observable,  } from 'rxjs';
+import { Observable, } from 'rxjs';
 
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import { CssBaseline } from '@material-ui/core';
+
+  
 export interface  ComponentProps {
     routes: RouteDto[];
     loadRoutes: Function;
     deleteProduct: (id: string) => void;
 }
 
-export class RouteList extends React.Component<ComponentProps, {}> {
+export class RouteList extends React.Component<ComponentProps & ClassNames, {}> {
     placeDto$: Observable<PlaceDto[]>;
 
-    constructor(props: ComponentProps) {
+    constructor(props: ComponentProps & ClassNames) {
         super(props);
 
         this.delProd = this.delProd.bind(this);
@@ -55,22 +63,43 @@ export class RouteList extends React.Component<ComponentProps, {}> {
     render() {
         if (this.props.routes) {
             return (
-                <div className="col-md-12">
-                    {this.props.routes.map((result, index) => {
-                        return result
-                            ? ([<div className="row" key={'row' + index}>
-                                <RouteItem key={`elem${index}`} route={result} onDelete={this.delProd} places={this.getPlaces()} />
-                            </div>,
-                            <div key={'emp-row' + index} className="row">&nbsp;</div>])
-                            : null;
-                    })}
+                <div>
+                    <ExpansionPanel
+                        square
+                    // expanded={expanded === 'panel1'}
+                    // onChange={this.handleChange('panel1')}
+                    >
+                        <ExpansionPanelSummary>
+                            <Typography className="typo-white">
+                        DestinationV
+                        </Typography>
+                        </ExpansionPanelSummary>
+                    </ExpansionPanel>
                 </div>
+                // <div className="col-md-12">
+                //     {this.props.routes.map((result, index) => {
+                //         return result
+                //             ? ([<div className="row" key={'row' + index}>
+                //                 <RouteItem key={`elem${index}`} route={result} onDelete={this.delProd} places={this.getPlaces()} />
+                //             </div>,
+                //             <div key={'emp-row' + index} className="row">&nbsp;</div>])
+                //             : null;
+                //     })}
+                // </div>
             );
         } else {
             return null;
         }
     }
 }
+
+const styles = (theme: any) => ({
+    // Look at here: applied specific styles to resizing and background
+    typeWhite: {
+        color: 'white'
+    }
+});
+type ClassNames = { classes: { [className in keyof typeof styles]: string } };
 
 interface OwnProps {
 }
@@ -87,4 +116,4 @@ const mapDispatchToProps = (dispatch: Function, props: OwnProps) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(RouteList)
+)(withStyles(styles)(RouteList))
