@@ -16,15 +16,15 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
     private destroy$: Subject<void> = new Subject<void>();
     private route = this.props.route;
     // private places: PlaceDto[] = [];
-
+    
+    state = {
+        modalShow: false,
+        origin: this.route.origin.id,
+        destination: this.route.destination.id
+    }
 
     constructor(props: any) {
         super(props);
-        this.state = {
-            modalShow: false,
-            origin: this.route.origin.id,
-            destination: this.route.destination.id
-        }
 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -40,7 +40,7 @@ export class RouteItem extends React.PureComponent<RouteItemProps, {modalShow: b
         this.destroy$.next();
     }
 
-    showModal() {
+    showModal = () => {
         this.setState({
             modalShow: true
         });
