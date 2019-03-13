@@ -3,9 +3,9 @@ import { PureComponent } from 'react';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import DvButton from './common/components/Button';
 import './TitleBar.scss';
 
 class TitleBar extends PureComponent<any> {
@@ -20,7 +20,7 @@ class TitleBar extends PureComponent<any> {
                     <Typography variant="h6" color="inherit" className="logo right-menu" onClick={() => this.goTo('')}>
                         DestinationV
                         </Typography>
-                    <Button color="inherit" onClick={() => this.goTo('routes')}>Route</Button>
+                    <DvButton onClick={() => this.goTo('routes')}>Route</DvButton>
                 </Toolbar>
             </AppBar>
         );
