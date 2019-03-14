@@ -32,7 +32,7 @@ export interface ComponentProps extends WithStyles<typeof styles> {
     deleteProduct: (id: string) => void;
 }
 
-export class RouteList extends React.Component<ComponentProps, {currentPanelId:string}> {
+export class RouteList extends React.Component<ComponentProps, { currentPanelId: string }> {
     placeDto$: Observable<PlaceDto[]>;
 
     constructor(props: ComponentProps) {
@@ -41,8 +41,9 @@ export class RouteList extends React.Component<ComponentProps, {currentPanelId:s
             currentPanelId: ''
         };
         this.delProd = this.delProd.bind(this);
+        this.handleStateChange = this.handleStateChange.bind(this);
     }
-   
+
     componentDidMount() {
         this.getData();
     }
@@ -73,7 +74,13 @@ export class RouteList extends React.Component<ComponentProps, {currentPanelId:s
         this.props.deleteProduct(id);
     }
 
-    handleStateChange = (panelId: string) => () => this.setState({ currentPanelId: panelId });
+    handleStateChange(panelId: string) {
+        const that = this;
+
+        return function() {
+            that.setState({ currentPanelId: panelId });
+        };
+    }
 
     render() {
         if (this.props.routes) {
@@ -81,13 +88,12 @@ export class RouteList extends React.Component<ComponentProps, {currentPanelId:s
                 <div className="container-fluid">
                     {this.props.routes.map((result, index) => {
                         return result ? (
-                            <ExpansionPanel expanded={this.state.currentPanelId === result.id}
+                            <ExpansionPanel
+                                expanded={this.state.currentPanelId === result.id}
                                 key={'eps' + index}
                                 square
-                                // expanded={expanded === 'panel1'}
-                                // onChange={this.handleChange('panel1')}
                             >
-                                <ExpansionPanelSummary >
+                                <ExpansionPanelSummary>
                                     <div
                                         className={
                                             'col-md-3 align-self-center ' +
@@ -98,20 +104,35 @@ export class RouteList extends React.Component<ComponentProps, {currentPanelId:s
                                         Origin: <strong>{result.origin.name}</strong>
                                     </div>
                                     <div
-                                        className="col-md-3 align-self-center"
+                                        className={
+                                            'col-md-3 align-self-center ' +
+                                            this.props.classes.typeWhite
+                                        }
                                         data-testid="routeDestination"
                                     >
                                         Destination: <strong>{result.destination.name}</strong>
                                     </div>
                                     <div
-                                        className="col-md-4 align-self-center"
+                                        className={
+                                            'col-md-4 align-self-center ' +
+                                            this.props.classes.typeWhite
+                                        }
                                         data-testid="routeDate"
                                     >
                                         Departing time: {result.departUtc}
                                     </div>
-                                    <div className="col-md-2 align-self-center">
-                                        <Fab color="primary" data-testid="buttonEdit" onClick={this.handleStateChange(result.id)}>
-                                            <EditIcon/>
+                                    <div
+                                        className={
+                                            'col-md-2 align-self-center ' +
+                                            this.props.classes.typeWhite
+                                        }
+                                    >
+                                        <Fab
+                                            color="primary"
+                                            data-testid="buttonEdit"
+                                            onClick={this.handleStateChange(result.id)}
+                                        >
+                                            <EditIcon />
                                         </Fab>
                                     </div>
                                 </ExpansionPanelSummary>
